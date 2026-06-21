@@ -8,13 +8,13 @@
     {
       "key": "generated_artifacts",
       "source": "generated/external_evidence.generated.json",
-      "sha256": "f40169e6ac8d83c4b3edc560efd795a5e422c7da434900aa0e2f7d34107c41c6",
+      "sha256": "9732e792245d0861d6f4f4fbc0901ee774e8552cf28bc578b43fe0952d5d9dd2",
       "public_safe": true
     },
     {
       "key": "source_descriptors",
       "source": "generated/external_evidence.generated.json",
-      "sha256": "f40169e6ac8d83c4b3edc560efd795a5e422c7da434900aa0e2f7d34107c41c6",
+      "sha256": "9732e792245d0861d6f4f4fbc0901ee774e8552cf28bc578b43fe0952d5d9dd2",
       "public_safe": true
     },
     {
