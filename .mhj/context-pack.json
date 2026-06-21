@@ -1,0 +1,17 @@
+{
+  "pack_id": "myhome-jarvis/context-pack",
+  "upstream_repo": "kimsemi-home/myhome-jarvis",
+  "context": "ExternalEvidenceRepoBootstrapPacket",
+  "context_pack_version": "v1",
+  "upstream_compatibility_version": "myhome-jarvis/context-pack/v1",
+  "ontology_version": "concept-registry/v1",
+  "authority_contract_version": "authority/v1",
+  "security_contract_version": "security/v1",
+  "verification_profile": "quality",
+  "exported_artifact_count": 6,
+  "private_lake_stays_private": true,
+  "raw_payload_public_allowed": false,
+  "external_writes_allowed": false,
+  "repo_creation_scope": "repo_creation",
+  "candidate_repo": "kimsemi-home/myhome-external-evidence-lake"
+}

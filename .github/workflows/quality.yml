@@ -1,0 +1,47 @@
+name: quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  public-skeleton:
+    name: Public skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Restore bootstrap hash cache
+        id: bootstrap-cache
+        uses: actions/cache/restore@v5
+        with:
+          path: .mhj/cache
+          key: external-evidence-bootstrap-${{ runner.os }}-${{ hashFiles('.mhj/context-pack.json', '.mhj/hash-cache-inputs.json', '.codex/project-goal.md', 'docs/**/*.md', 'scripts/**/*.sh') }}
+
+      - name: Validate public safety and generated contracts
+        run: scripts/verify-public-skeleton.sh
+
+      - name: Record bootstrap cache marker
+        if: steps.bootstrap-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .mhj/cache
+          sha256sum \
+            .mhj/context-pack.json \
+            .mhj/hash-cache-inputs.json \
+            .codex/project-goal.md \
+            docs/*.md \
+            scripts/*.sh > .mhj/cache/bootstrap.sha256
+
+      - name: Save bootstrap hash cache
+        if: steps.bootstrap-cache.outputs.cache-hit != 'true' && github.event_name == 'push' && github.repository == 'kimsemi-home/myhome-external-evidence-lake'
+        uses: actions/cache/save@v5
+        continue-on-error: true
+        with:
+          path: .mhj/cache
+          key: ${{ steps.bootstrap-cache.outputs.cache-primary-key }}

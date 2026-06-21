@@ -1,0 +1,39 @@
+{
+  "context": "ExternalEvidenceRepoBootstrapPacket",
+  "version": "v1",
+  "candidate_repo": "kimsemi-home/myhome-external-evidence-lake",
+  "source_policy": "generated/external_evidence.generated.json",
+  "generated_contract_verified": true,
+  "hash_cache_inputs": [
+    {
+      "key": "generated_artifacts",
+      "source": "generated/external_evidence.generated.json",
+      "sha256": "f40169e6ac8d83c4b3edc560efd795a5e422c7da434900aa0e2f7d34107c41c6",
+      "public_safe": true
+    },
+    {
+      "key": "source_descriptors",
+      "source": "generated/external_evidence.generated.json",
+      "sha256": "f40169e6ac8d83c4b3edc560efd795a5e422c7da434900aa0e2f7d34107c41c6",
+      "public_safe": true
+    },
+    {
+      "key": "workflow_dependencies",
+      "source": ".github/workflows/quality.yml",
+      "sha256": "85a4af791e9482e0fbc1d960fe01566e65e508baa6aeccc5f48eb32b6bd3b8de",
+      "public_safe": true
+    },
+    {
+      "key": "context_pack_version",
+      "source": "v1",
+      "sha256": "3bfc269594ef649228e9a74bab00f042efc91d5acc6fbee31a382e80d42388fe",
+      "public_safe": true
+    },
+    {
+      "key": "ontology_version",
+      "source": "concept-registry/v1",
+      "sha256": "a4a500b25b5cd3a9d29b05bb3a3ea80e9ab7d76e457c0516cb00a6bbadb8b1c4",
+      "public_safe": true
+    }
+  ]
+}
