@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: .mhj/cache
-          key: external-evidence-bootstrap-${{ runner.os }}-${{ hashFiles('.mhj/context-pack.json', '.mhj/hash-cache-inputs.json', '.codex/project-goal.md', 'docs/**/*.md', 'scripts/**/*.sh') }}
+          key: external-evidence-bootstrap-${{ runner.os }}-${{ hashFiles('.mhj/context-pack.json', '.mhj/hash-cache-inputs.json', '.codex/project-goal.md', 'docs/**/*.md', 'schemas/**/*.json', 'fixtures/**/*.json', 'scripts/**/*.sh') }}
 
       - name: Validate public safety and generated contracts
         run: scripts/verify-public-skeleton.sh
@@ -36,6 +36,8 @@ jobs:
             .mhj/hash-cache-inputs.json \
             .codex/project-goal.md \
             docs/*.md \
+            schemas/*.json \
+            fixtures/*.json \
             scripts/*.sh > .mhj/cache/bootstrap.sha256
 
       - name: Save bootstrap hash cache

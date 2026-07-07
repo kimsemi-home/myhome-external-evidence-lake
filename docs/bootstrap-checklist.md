@@ -11,6 +11,8 @@
 - [x] Public-safety verification script is present.
 - [x] GitHub Actions validates generated contract metadata.
 - [x] Hash cache inputs are declared per bootstrap unit.
+- [x] Public-safe UI status schema and fixture are present.
+- [x] Upstream Flutter Connectors metadata mapping is documented.
 
 ## Next Allowed Work
 

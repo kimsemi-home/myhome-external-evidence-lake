@@ -22,4 +22,5 @@ Every pull request and main push must run:
 - public-safety scan
 - context pack contract validation
 - hash-cache input validation
+- upstream Flutter UI metadata validation
 - bootstrap checklist validation

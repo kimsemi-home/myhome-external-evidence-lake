@@ -10,6 +10,10 @@ required_files=(
   "docs/security.md"
   "docs/private-data-policy.md"
   "docs/bootstrap-checklist.md"
+  "docs/importer-boundary.md"
+  "docs/upstream-flutter-ui-contract.md"
+  "schemas/ui-status.schema.json"
+  "fixtures/public-ui-status.sample.json"
 )
 
 for file in "${required_files[@]}"; do
@@ -63,5 +67,36 @@ jq -e '
   ] | sort) and
   all(.hash_cache_inputs[]; .public_safe == true and (.sha256 | test("^[0-9a-f]{64}$")))
 ' .mhj/hash-cache-inputs.json >/dev/null
+
+jq -e '
+  .schema_version == "evidence-lake-ui-status/v1" and
+  .repo == "kimsemi-home/myhome-external-evidence-lake" and
+  .upstream_repo == "kimsemi-home/myhome-jarvis" and
+  .context_pack_version == "v1" and
+  (.readiness | IN("bootstrap", "ready", "blocked")) and
+  (.freshness.status | IN("fixture", "fresh", "stale", "unknown")) and
+  .validation.command == "scripts/verify-public-skeleton.sh" and
+  .validation.public_safety_scan == true and
+  .boundaries.raw_payloads_present == false and
+  .boundaries.credentials_present == false and
+  .boundaries.private_archives_present == false and
+  .boundaries.external_writes_allowed == false and
+  (.blocked_reason | length > 0) and
+  .last_safe_check.command == "scripts/verify-public-skeleton.sh" and
+  (.last_safe_check.result | IN("passing", "failing", "not_run")) and
+  .upstream_connector.key == "external-evidence-lake" and
+  .upstream_connector.label == "External evidence lake" and
+  .upstream_connector.category == "public_evidence_boundary" and
+  .upstream_connector.status == .readiness and
+  .upstream_connector.fixture_mode == true and
+  (.upstream_connector.data_classes | index("ui_status_metadata")) and
+  (.upstream_connector.allowed_operations | index("read_public_fixture")) and
+  (.upstream_connector.forbidden_operations | index("raw_payload_import")) and
+  (.upstream_connector.forbidden_operations | index("credential_request")) and
+  (.upstream_connector.forbidden_operations | index("private_archive")) and
+  (.upstream_connector.forbidden_operations | index("collector_write")) and
+  (.display_cards | length >= 1) and
+  all(.display_cards[]; (.id | test("^[a-z][a-z0-9-]*$")) and (.state | IN("ready", "watch", "blocked")))
+' fixtures/public-ui-status.sample.json >/dev/null
 
 echo "public skeleton verification passed"

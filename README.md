@@ -11,6 +11,7 @@ code here.
 
 - Declare the downstream context pack for external evidence work.
 - Preserve a public-safe bootstrap checklist and private data boundary.
+- Expose public-safe read-only UI status metadata for upstream Flutter cards.
 - Run public-safety checks on every pull request and main push.
 - Cache bootstrap units by hash so unchanged work avoids unnecessary expensive
   steps while generated contracts are still validated.
@@ -29,3 +30,15 @@ code here.
 - Ontology version: `concept-registry/v1`
 - Authority contract: `authority/v1`
 - Security contract: `security/v1`
+
+## Public UI Status
+
+- Schema: `schemas/ui-status.schema.json`
+- Fixture: `fixtures/public-ui-status.sample.json`
+- Boundary note: `docs/importer-boundary.md`
+- Upstream Flutter mapping: `docs/upstream-flutter-ui-contract.md`
+
+The fixture is safe for upstream UI rendering because it contains only readiness,
+freshness, validation, and boundary-state metadata. It does not contain raw
+evidence, credentials, private archives, account identifiers, or external-write
+configuration.
