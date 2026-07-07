@@ -1,0 +1,73 @@
+{
+  "schema_version": "evidence-lake-ui-status/v1",
+  "repo": "kimsemi-home/myhome-external-evidence-lake",
+  "upstream_repo": "kimsemi-home/myhome-jarvis",
+  "context_pack_version": "v1",
+  "readiness": "bootstrap",
+  "freshness": {
+    "status": "fixture",
+    "checked_at": "2026-07-07T00:00:00Z",
+    "source": "public-fixture"
+  },
+  "validation": {
+    "status": "passing",
+    "command": "scripts/verify-public-skeleton.sh",
+    "public_safety_scan": true
+  },
+  "boundaries": {
+    "raw_payloads_present": false,
+    "credentials_present": false,
+    "private_archives_present": false,
+    "external_writes_allowed": false
+  },
+  "blocked_reason": "Collectors and raw evidence require separate scoped approval.",
+  "last_safe_check": {
+    "checked_at": "2026-07-07T00:00:00Z",
+    "command": "scripts/verify-public-skeleton.sh",
+    "result": "passing"
+  },
+  "upstream_connector": {
+    "key": "external-evidence-lake",
+    "label": "External evidence lake",
+    "category": "public_evidence_boundary",
+    "status": "bootstrap",
+    "fixture_mode": true,
+    "data_classes": [
+      "context_pack",
+      "ui_status_metadata",
+      "validation_summary"
+    ],
+    "allowed_operations": [
+      "read_public_fixture",
+      "show_status",
+      "link_upstream"
+    ],
+    "forbidden_operations": [
+      "raw_payload_import",
+      "credential_request",
+      "private_archive",
+      "collector_write"
+    ],
+    "next_step": "Render public status only from the evidence-lake UI metadata fixture."
+  },
+  "display_cards": [
+    {
+      "id": "context-pack",
+      "title": "Context Pack",
+      "state": "ready",
+      "detail": "Public-safe v1 metadata is declared for upstream UI."
+    },
+    {
+      "id": "private-boundary",
+      "title": "Private Boundary",
+      "state": "ready",
+      "detail": "Raw payloads, credentials, private archives, and external writes are absent."
+    },
+    {
+      "id": "collector-scope",
+      "title": "Collector Scope",
+      "state": "blocked",
+      "detail": "Collection adapters are intentionally out of scope until separately approved."
+    }
+  ]
+}

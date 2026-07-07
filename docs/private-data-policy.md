@@ -9,6 +9,7 @@ validation scripts, and generated metadata that has already been redacted.
 - Public-safe context pack declarations.
 - Hashes of public-safe upstream generated artifacts.
 - Documentation describing boundaries and review gates.
+- Read-only upstream UI metadata for public status cards.
 - Validation scripts that reject private or local material.
 
 ## Not Allowed

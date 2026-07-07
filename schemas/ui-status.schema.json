@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kimsemi-home.github.io/myhome-external-evidence-lake/schemas/ui-status.schema.json",
+  "title": "External Evidence Lake UI Status",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "repo",
+    "upstream_repo",
+    "context_pack_version",
+    "readiness",
+    "freshness",
+    "validation",
+    "boundaries",
+    "blocked_reason",
+    "last_safe_check",
+    "upstream_connector",
+    "display_cards"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "evidence-lake-ui-status/v1"
+    },
+    "repo": {
+      "const": "kimsemi-home/myhome-external-evidence-lake"
+    },
+    "upstream_repo": {
+      "const": "kimsemi-home/myhome-jarvis"
+    },
+    "context_pack_version": {
+      "const": "v1"
+    },
+    "readiness": {
+      "enum": ["bootstrap", "ready", "blocked"]
+    },
+    "freshness": {
+      "type": "object",
+      "required": ["status", "checked_at", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["fixture", "fresh", "stale", "unknown"]
+        },
+        "checked_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["status", "command", "public_safety_scan"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["passing", "failing", "not_run"]
+        },
+        "command": {
+          "const": "scripts/verify-public-skeleton.sh"
+        },
+        "public_safety_scan": {
+          "type": "boolean"
+        }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "required": [
+        "raw_payloads_present",
+        "credentials_present",
+        "private_archives_present",
+        "external_writes_allowed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "raw_payloads_present": {
+          "const": false
+        },
+        "credentials_present": {
+          "const": false
+        },
+        "private_archives_present": {
+          "const": false
+        },
+        "external_writes_allowed": {
+          "const": false
+        }
+      }
+    },
+    "blocked_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_safe_check": {
+      "type": "object",
+      "required": ["checked_at", "command", "result"],
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "const": "scripts/verify-public-skeleton.sh"
+        },
+        "result": {
+          "enum": ["passing", "failing", "not_run"]
+        }
+      }
+    },
+    "upstream_connector": {
+      "type": "object",
+      "required": [
+        "key",
+        "label",
+        "category",
+        "status",
+        "fixture_mode",
+        "data_classes",
+        "allowed_operations",
+        "forbidden_operations",
+        "next_step"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "const": "external-evidence-lake"
+        },
+        "label": {
+          "const": "External evidence lake"
+        },
+        "category": {
+          "const": "public_evidence_boundary"
+        },
+        "status": {
+          "enum": ["bootstrap", "ready", "blocked"]
+        },
+        "fixture_mode": {
+          "const": true
+        },
+        "data_classes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_operations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "forbidden_operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_step": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "display_cards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "state", "detail"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": ["ready", "watch", "blocked"]
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}
