@@ -1,0 +1,13 @@
+{
+  "schema_version": "repo.traceability/v1",
+  "groups": [
+    {
+      "id": "shorts-trend-evidence",
+      "document_sources": ["docs-src/shorts-trend-evidence.json"],
+      "generated_documents": ["docs/shorts-trend-evidence.md"],
+      "code": ["cmd/lakectl", "internal/lake", "contracts/shorts-trend-evidence.json", "fixtures/shorts-trend-observation.sample.json"],
+      "tests": ["internal/lake/verify_test.go"],
+      "change_policy": "bidirectional"
+    }
+  ]
+}

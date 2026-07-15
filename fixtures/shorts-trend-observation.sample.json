@@ -1,0 +1,38 @@
+{
+  "schema_version": "shorts.trend-observation/v1",
+  "observation_id": "trend-observation-example-001",
+  "source": {
+    "source_id": "youtube-most-popular-kr",
+    "source_class": "official_platform_api",
+    "provider": "youtube-data-api",
+    "authorization": "non_authorized_public_data",
+    "retrieved_at": "2026-07-15T00:00:00Z",
+    "expires_at": "2026-08-14T00:00:00Z",
+    "source_uri_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "payload_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "rights_status": "metadata_analysis_only"
+  },
+  "signal": {
+    "region": "KR",
+    "category": "science-education",
+    "kind": "topic_momentum",
+    "direction": "rising",
+    "confidence_band": "medium",
+    "window_start": "2026-07-14T00:00:00Z",
+    "window_end": "2026-07-15T00:00:00Z"
+  },
+  "provenance": {
+    "collector_version": "disabled-fixture/v1",
+    "transform_version": "public-metadata-projection/v1",
+    "event_time_preserved": true,
+    "retrieval_time_preserved": true
+  },
+  "boundaries": {
+    "contains_raw_payload": false,
+    "contains_credentials": false,
+    "contains_account_identifiers": false,
+    "contains_revenue_details": false,
+    "contains_local_paths": false,
+    "allows_external_write": false
+  }
+}

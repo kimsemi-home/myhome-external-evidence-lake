@@ -1,0 +1,37 @@
+{
+  "schema_version": "shorts.trend-contract/v1",
+  "contract_id": "public-shorts-trend-evidence",
+  "collector_enabled": false,
+  "network_writes_allowed": false,
+  "raw_payloads_allowed": false,
+  "account_identifiers_allowed": false,
+  "max_api_data_revalidation_days": 30,
+  "decision_use": "hypothesis_input_only",
+  "source_classes": [
+    "official_platform_api",
+    "primary_scientific_source",
+    "official_economic_indicator",
+    "public_news_metadata",
+    "public_community_metadata"
+  ],
+  "required_provenance": [
+    "source_id",
+    "source_class",
+    "provider",
+    "retrieved_at",
+    "expires_at",
+    "source_uri_sha256",
+    "payload_sha256",
+    "rights_status",
+    "event_window"
+  ],
+  "forbidden_fields": [
+    "raw_payload",
+    "oauth_token",
+    "cookie",
+    "account_id",
+    "channel_id",
+    "revenue",
+    "local_path"
+  ]
+}
