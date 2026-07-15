@@ -16,29 +16,37 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: "1.26.5"
+          cache: true
 
       - name: Restore bootstrap hash cache
         id: bootstrap-cache
         uses: actions/cache/restore@v5
         with:
           path: .mhj/cache
-          key: external-evidence-bootstrap-${{ runner.os }}-${{ hashFiles('.mhj/context-pack.json', '.mhj/hash-cache-inputs.json', '.codex/project-goal.md', 'docs/**/*.md', 'schemas/**/*.json', 'fixtures/**/*.json', 'scripts/**/*.sh') }}
+          key: external-evidence-bootstrap-${{ runner.os }}-${{ hashFiles('go.mod', 'cmd/**/*.go', 'internal/**/*.go', '.mhj/context-pack.json', '.mhj/hash-cache-inputs.json', '.codex/project-goal.md', 'docs-src/**/*.json', 'docs/**/*.md', 'contracts/**/*.json', 'schemas/**/*.json', 'fixtures/**/*.json') }}
 
       - name: Validate public safety and generated contracts
-        run: scripts/verify-public-skeleton.sh
+        run: |
+          go run ./cmd/lakectl verify
+          go test ./...
+
+      - name: Validate document-code coupling
+        if: github.event_name == 'pull_request'
+        run: go run ./cmd/lakectl trace range origin/${{ github.base_ref }}
 
       - name: Record bootstrap cache marker
         if: steps.bootstrap-cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p .mhj/cache
-          sha256sum \
-            .mhj/context-pack.json \
-            .mhj/hash-cache-inputs.json \
-            .codex/project-goal.md \
-            docs/*.md \
-            schemas/*.json \
-            fixtures/*.json \
-            scripts/*.sh > .mhj/cache/bootstrap.sha256
+          go run ./cmd/lakectl verify
+          printf '%s\n' '${{ steps.bootstrap-cache.outputs.cache-primary-key }}' > .mhj/cache/bootstrap.key
 
       - name: Save bootstrap hash cache
         if: steps.bootstrap-cache.outputs.cache-hit != 'true' && github.event_name == 'push' && github.repository == 'kimsemi-home/myhome-external-evidence-lake'

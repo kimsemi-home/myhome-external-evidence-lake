@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+go run ./cmd/lakectl docs check
+go run ./cmd/lakectl safety check
+go run ./cmd/lakectl trace staged

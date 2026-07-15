@@ -61,7 +61,7 @@
           "enum": ["passing", "failing", "not_run"]
         },
         "command": {
-          "const": "scripts/verify-public-skeleton.sh"
+          "const": "go run ./cmd/lakectl verify"
         },
         "public_safety_scan": {
           "type": "boolean"
@@ -106,7 +106,7 @@
           "minLength": 1
         },
         "command": {
-          "const": "scripts/verify-public-skeleton.sh"
+          "const": "go run ./cmd/lakectl verify"
         },
         "result": {
           "enum": ["passing", "failing", "not_run"]

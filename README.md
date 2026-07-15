@@ -15,6 +15,8 @@ code here.
 - Run public-safety checks on every pull request and main push.
 - Cache bootstrap units by hash so unchanged work avoids unnecessary expensive
   steps while generated contracts are still validated.
+- Publish metadata-only Shorts trend evidence contracts with a 30-day
+  revalidation boundary and no collector writes.
 
 ## Explicit Non-Scope
 
@@ -42,3 +44,10 @@ The fixture is safe for upstream UI rendering because it contains only readiness
 freshness, validation, and boundary-state metadata. It does not contain raw
 evidence, credentials, private archives, account identifiers, or external-write
 configuration.
+
+## Verification
+
+```sh
+go run ./cmd/lakectl verify
+go test ./...
+```

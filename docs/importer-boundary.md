@@ -45,7 +45,7 @@ The status card contract is intentionally small:
 Run:
 
 ```sh
-scripts/verify-public-skeleton.sh
+go run ./cmd/lakectl verify
 ```
 
 The verifier checks required files, scans for private material, validates the

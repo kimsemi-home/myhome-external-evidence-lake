@@ -13,6 +13,8 @@
 - [x] Hash cache inputs are declared per bootstrap unit.
 - [x] Public-safe UI status schema and fixture are present.
 - [x] Upstream Flutter Connectors metadata mapping is documented.
+- [x] Go standard-library verifier replaces jq-dependent validation.
+- [x] Public Shorts trend metadata contract and safe fixture are present.
 
 ## Next Allowed Work
 

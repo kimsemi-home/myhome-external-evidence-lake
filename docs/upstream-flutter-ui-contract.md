@@ -64,7 +64,7 @@ It must not show or derive:
 Run:
 
 ```sh
-scripts/verify-public-skeleton.sh
+go run ./cmd/lakectl verify
 ```
 
 The verifier checks the fixture shape, the upstream connector mapping, and the

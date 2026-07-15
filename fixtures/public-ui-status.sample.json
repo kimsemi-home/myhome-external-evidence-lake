@@ -11,7 +11,7 @@
   },
   "validation": {
     "status": "passing",
-    "command": "scripts/verify-public-skeleton.sh",
+    "command": "go run ./cmd/lakectl verify",
     "public_safety_scan": true
   },
   "boundaries": {
@@ -23,7 +23,7 @@
   "blocked_reason": "Collectors and raw evidence require separate scoped approval.",
   "last_safe_check": {
     "checked_at": "2026-07-07T00:00:00Z",
-    "command": "scripts/verify-public-skeleton.sh",
+    "command": "go run ./cmd/lakectl verify",
     "result": "passing"
   },
   "upstream_connector": {
